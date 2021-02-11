@@ -134,7 +134,6 @@ std::vector<std::string> PaperUtils::LoadGIF(std::string path, PaperApp *instanc
 
     for(int i = 0; i < frameCount; i++) {
         std::string exportPath = ((std::string)"assets/" + GetFileNameWithoutExt(path.c_str()) +std::to_string(i) + (std::string)".png");
-        
         FIBITMAP *frame = FreeImage_LockPage(bitmap, i);
         bool success = FreeImage_Save(FIF_PNG, frame, exportPath.c_str());
         FreeImage_UnlockPage(bitmap, frame, false);

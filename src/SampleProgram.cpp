@@ -2,13 +2,11 @@
 #include "raylib.h"
 #include <iostream>
 #include <filesystem>
-#include <bits/stdc++.h>
 
 class Program : public PaperApp {
     public:
         CenteredText centeredText;
         FontData fd;
-
 
         Program() : PaperApp(1280, 720, "Paper Project") {}
         
@@ -17,7 +15,6 @@ class Program : public PaperApp {
 
             fd = FontData(GetFontDefault(), 32.0f, 1.0f);
             centeredText = CenteredText((Vector2){(float)this->width/2, (float)this->height/2}, fd, BLACK, "Made in Paper!");
-            
         }
 
         void Update () override {
