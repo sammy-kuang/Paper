@@ -5,15 +5,10 @@
 
 
 PaperApp::PaperApp(int x, int y, std::string title) {
-    this->width = x;
-    this->height = y;
+    this->initWidth = x;
+    this->initHeight = y;
     this->title = title;
 }
-
-// void PaperApp::Awake() {}
-// void PaperApp::Start() {}
-// void PaperApp::Update() {}
-// void PaperApp::OnClose() {}
 
 void PaperApp::Draw() {
     ClearBackground(WHITE);
@@ -27,7 +22,7 @@ void PaperApp::PaperDraw() {
 
 void PaperApp::PaperStart() {
     Awake();
-    InitWindow(width, height, title.c_str());
+    InitWindow(initWidth, initHeight, title.c_str());
     std::cout << "PAPER: OpenGL context opened" << std::endl;
     Start();
 
@@ -54,4 +49,8 @@ void PaperApp::Cleanup() {
         if(success != 0)
             std::cout << "PAPER: ERROR: Error trying to remove a file on cleanup: " + (std::string)filesToRemove[i] << std::endl;
     }
+}
+
+Vector2 PaperApp::GetCenter() {
+    return (Vector2){(float)(GetScreenWidth())/2, (float)(GetScreenHeight())/2};
 }

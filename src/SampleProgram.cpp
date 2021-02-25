@@ -1,20 +1,17 @@
 #include "Paper.h"
 #include "raylib.h"
+#include "raygui.h"
 #include <iostream>
 #include <filesystem>
 
 class Program : public PaperApp {
     public:
-        CenteredText centeredText;
-        FontData fd;
 
+         
         Program() : PaperApp(1280, 720, "Paper Project") {}
         
         void Start() override {
             SetTargetFPS(60);
-
-            fd = FontData(GetFontDefault(), 32.0f, 1.0f);
-            centeredText = CenteredText((Vector2){(float)this->width/2, (float)this->height/2}, fd, BLACK, "Made in Paper!");
         }
 
         void Update () override {
@@ -22,9 +19,9 @@ class Program : public PaperApp {
         }
 
         void Draw() override {
-            ClearBackground(WHITE);
-            centeredText.Draw();
-        }
+            ClearBackground(GetColor(GuiGetStyle(DEFAULT, BACKGROUND_COLOR)));
+            GuiStatusBar((Rectangle) { 0, GetScreenHeight() - 20, GetScreenWidth(), 20 }, "Made in Paper!");
+        }   
 };
 
 int main(int argc, char *argv[]) {
