@@ -152,3 +152,7 @@ std::vector<std::string> PaperUtils::LoadGIF(std::string path, PaperApp *instanc
 
     return returnVector;
 }
+
+Rectangle PaperUtils::CreateRectangle(Vector2 p, Vector2 s) {
+    return (Rectangle){p.x,p.y,s.x,s.y};
+}

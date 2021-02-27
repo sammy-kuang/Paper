@@ -4,5 +4,6 @@
 #include "PaperApp.h"
 #include "PaperUtils.h"
 #include "PaperObjects.h"
+#include "PaperUI.h"
 
 #endif

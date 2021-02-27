@@ -1,26 +1,30 @@
 #include "Paper.h"
-#include "raylib.h"
-#include "raygui.h"
 #include <iostream>
 #include <filesystem>
 
 class Program : public PaperApp {
     public:
+        Program() : PaperApp(640, 480, "Paper Project") {}
+        PaperListView pdb;
+        PaperGroupBox pgb;
+        std::vector<std::string> list;
 
-         
-        Program() : PaperApp(1280, 720, "Paper Project") {}
-        
         void Start() override {
-            SetTargetFPS(60);
+            SetTargetFPS(30);
+            list.push_back("Made in");
+            list.push_back("#80#Paper!");
+            pgb = PaperGroupBox(GetCenter(), (Vector2){200, 200}, "Lists");
+            pdb = PaperListView((Vector2){GetCenter().x, GetCenter().y}, (Vector2){150, 150}, list);
         }
 
         void Update () override {
-
+            
         }
 
         void Draw() override {
-            ClearBackground(GetColor(GuiGetStyle(DEFAULT, BACKGROUND_COLOR)));
-            GuiStatusBar((Rectangle) { 0, GetScreenHeight() - 20, GetScreenWidth(), 20 }, "Made in Paper!");
+            ClearBackground(WHITE);
+            pdb.DrawCentered();
+            pgb.DrawCentered();
         }   
 };
 
