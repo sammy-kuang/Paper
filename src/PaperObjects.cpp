@@ -4,6 +4,7 @@
 #include "raylib.h"
 #include "PaperObjects.h"
 #include "PaperUtils.h"
+#include "PaperApp.h"
 
 Circle::Circle(Vector2 postiion, float radius) {
     this->position = position;
@@ -129,4 +130,8 @@ void CenteredAnimatedTexture::Draw() {
 
 bool CenteredAnimatedTexture::CanDraw() {
     return frames.size() > 0;
+}
+
+PaperTask::PaperTask(PaperApp *app) {
+    this->app = app;
 }

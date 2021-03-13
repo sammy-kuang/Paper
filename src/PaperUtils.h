@@ -1,7 +1,10 @@
 #include "raylib.h"
-#include "PaperObjects.h"
-#include "PaperApp.h"
 #include <vector>
+
+class Circle;
+class FontData;
+class PaperApp;
+class CenteredObject;
 
 #ifndef PAPERUTILS_H
 #define PAPERUTILS_H

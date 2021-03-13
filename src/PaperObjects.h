@@ -2,6 +2,8 @@
 #include <string>
 #include <vector>
 
+class PaperApp;
+
 #ifndef PAPEROBJECTS_H
 #define PAPEROBJECTS_H
 
@@ -88,12 +90,14 @@ class CenteredAnimatedTexture : public CenteredObject {
 
 };
 
-// Implementation of Tasks concept=
+// Implementation of Tasks concept
 
 class PaperTask {
     public:
-        PaperTask() {}
+        PaperTask(PaperApp *app);
         virtual void Run() {}
+    private:
+        PaperApp *app;
 };
 
 #endif

@@ -2977,7 +2977,7 @@ void GuiLoadStyleDefault(void)
     GuiSetStyle(DEFAULT, BACKGROUND_COLOR, 0xf5f5f5ff); // DEFAULT specific property
     GuiSetStyle(TOGGLE, GROUP_PADDING, 2);
     GuiSetStyle(SLIDER, SLIDER_WIDTH, 15);
-    GuiSetStyle(SLIDER, SLIDER_PADDING, 1);
+    GuiSetStyle(SLIDER, SLIDER_PADDING, 0);
     GuiSetStyle(PROGRESSBAR, PROGRESS_PADDING, 1);
     GuiSetStyle(CHECKBOX, CHECK_PADDING, 1);
     GuiSetStyle(COMBOBOX, COMBO_BUTTON_WIDTH, 30);

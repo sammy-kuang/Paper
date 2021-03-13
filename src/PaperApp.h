@@ -1,10 +1,11 @@
 #include <string>
 #include <vector>
 #include "raylib.h"
-#include "PaperObjects.h"
 
 #ifndef PAPERAPP_H
 #define PAPERAPP_H
+
+class PaperTask;
 
 class PaperApp {
     public:

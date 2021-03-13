@@ -33,7 +33,7 @@ void PaperUI::LoadStyle(std::string path) {
 }
 
 void PaperUI::DrawThemeColor() {
-    
+    ClearBackground(GetColor(GuiGetStyle(DEFAULT, BACKGROUND_COLOR)));
 }
 
 PaperUIObject::PaperUIObject(Vector2 position, Vector2 size) : CenteredRectangle(position, size) {

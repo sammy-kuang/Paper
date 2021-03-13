@@ -3,6 +3,8 @@
 #include "PaperObjects.h"
 #include "raylib.h"
 
+class PaperApp;
+
 class PaperUI {
     public:
         static std::string IconText(int iconId, std::string text);

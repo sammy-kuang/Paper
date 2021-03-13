@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include "raylib.h"
+#include "PaperObjects.h"
 #include "PaperApp.h"
 
 
