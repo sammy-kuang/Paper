@@ -1,6 +1,7 @@
 #include "PaperUI.h"
 #include "PaperUtils.h"
 #include <string>
+#include <iostream>
 #include <vector>
 #include "raylib.h"
 
@@ -27,25 +28,29 @@ void PaperUI::SetTextOnButtonCentered() {
     GuiSetStyle(BUTTON, TEXT_ALIGNMENT, GUI_TEXT_ALIGN_CENTER);
 }
 
-
-UIObject::UIObject(Vector2 position, Vector2 size) {
-    this->position = position;
-    this->size = size;
-    this->centerPos = PaperUtils::CenterRectToPoint(position, size);
-    this->rectangle = (Rectangle){position.x, position.y, size.x, size.y};
+void PaperUI::LoadStyle(std::string path) {
+    GuiLoadStyle(path.c_str());
 }
 
-void UIObject::Draw() {
-    DrawPos(position, size);
+void PaperUI::DrawThemeColor() {
+    
 }
 
-void UIObject::DrawCentered() {
-    DrawPos(centerPos, size);
+PaperUIObject::PaperUIObject(Vector2 position, Vector2 size) : CenteredRectangle(position, size) {
+    Center();
+}
+
+void PaperUIObject::Draw() {
+    DrawPos(literalPosition);
+}
+
+void PaperUIObject::DrawUncentered() {
+    DrawPos(position);
 }
 
 // PaperTextBox
 
-PaperTextBox::PaperTextBox(Vector2 position, Vector2 size, std::string initialText, int initialSize) : UIObject(position, size) {
+PaperTextBox::PaperTextBox(Vector2 position, Vector2 size, std::string initialText, int initialSize) : PaperUIObject(position, size) {
     this->initialText = initialText;
     this->initialSize = initialSize;
 
@@ -53,8 +58,8 @@ PaperTextBox::PaperTextBox(Vector2 position, Vector2 size, std::string initialTe
 }
 
 
-void PaperTextBox::DrawPos(Vector2 pos, Vector2 s) {
-    if(GuiTextBox(PaperUtils::CreateRectangle(pos,s), text, initialSize, editMode)) editMode = !editMode;
+void PaperTextBox::DrawPos(Vector2 pos) {
+    if(GuiTextBox(PaperUtils::CreateRectangle(pos,this->size), text, initialSize, editMode)) editMode = !editMode;
 }
 
 
@@ -63,7 +68,7 @@ std::string PaperTextBox::GetText() {
 }
 
 // PaperSlider
-PaperSlider::PaperSlider(Vector2 position, Vector2 size, std::string label, bool showValue,int sliderValue, int minValue, int maxValue) : UIObject(position, size) {
+PaperSlider::PaperSlider(Vector2 position, Vector2 size, std::string label, bool showValue,int sliderValue, int minValue, int maxValue) : PaperUIObject(position, size) {
     this->label = label;
     this->showValue = showValue;
     this->sliderValue = sliderValue;
@@ -71,8 +76,8 @@ PaperSlider::PaperSlider(Vector2 position, Vector2 size, std::string label, bool
     this->maxValue = maxValue;
 }
 
-void PaperSlider::DrawPos(Vector2 pos, Vector2 s) {
-    sliderValue = GuiSlider(PaperUtils::CreateRectangle(pos,s), label.c_str(), showValue ? GetValueString().c_str() : NULL, sliderValue,minValue, maxValue);
+void PaperSlider::DrawPos(Vector2 pos) {
+    sliderValue = GuiSlider(PaperUtils::CreateRectangle(pos,this->size), label.c_str(), showValue ? GetValueString().c_str() : NULL, sliderValue,minValue, maxValue);
 }
 
 std::string PaperSlider::GetValueString() {
@@ -86,20 +91,29 @@ int PaperSlider::GetValue() {
 // PaperSliderBar
 PaperSliderBar::PaperSliderBar(Vector2 position, Vector2 size, std::string label, bool showValue,int sliderValue, int minValue, int maxValue) : PaperSlider(position, size, label, showValue,sliderValue, minValue, maxValue) {}
 
-void PaperSliderBar::DrawPos(Vector2 pos, Vector2 s) {
-    sliderValue = GuiSliderBar(PaperUtils::CreateRectangle(pos,s), label.c_str(), GetValueString().c_str(), sliderValue, minValue, maxValue);
+void PaperSliderBar::DrawPos(Vector2 pos) {
+    sliderValue = GuiSliderBar(PaperUtils::CreateRectangle(pos,this->size), label.c_str(), GetValueString().c_str(), sliderValue, minValue, maxValue);
+}
+
+// PaperProgressBar
+PaperProgressBar::PaperProgressBar(Vector2 position, Vector2 size, std::string label, bool showValue,int sliderValue, int minValue, int maxValue) : PaperSlider(position, size, label, showValue,sliderValue, minValue, maxValue) {}
+
+void PaperProgressBar::DrawPos(Vector2 pos) {
+    sliderValue = GuiProgressBar(PaperUtils::CreateRectangle(pos,this->size), label.c_str(), GetValueString().c_str(), sliderValue, minValue, maxValue);
 }
 
 // PaperClickable
-PaperClickable::PaperClickable(Vector2 position, Vector2 size, std::string label) : UIObject(position, size) {
+PaperClickable::PaperClickable(Vector2 position, Vector2 size, std::string label) : PaperUIObject(position, size) {
     this->label = label;
 }
+
+
 
 // PaperButton
 PaperButton::PaperButton(Vector2 position, Vector2 size, std::string label) : PaperClickable(position, size, label) {}
 
-void PaperButton::DrawPos(Vector2 pos, Vector2 s) {
-    this->clicked = GuiButton(PaperUtils::CreateRectangle(pos,s), label.c_str());
+void PaperButton::DrawPos(Vector2 pos) {
+    this->clicked = GuiButton(PaperUtils::CreateRectangle(pos,this->size), label.c_str());
 }
 
 bool PaperButton::Clicked() {
@@ -109,8 +123,8 @@ bool PaperButton::Clicked() {
 // PaperCheckbox
 PaperCheckbox::PaperCheckbox(Vector2 pos, Vector2 size, std::string label) : PaperClickable(pos, size, label) {}
 
-void PaperCheckbox::DrawPos(Vector2 pos, Vector2 s) {
-    this->clicked = GuiCheckBox(PaperUtils::CreateRectangle(pos,s), label.c_str(), clicked);
+void PaperCheckbox::DrawPos(Vector2 pos) {
+    this->clicked = GuiCheckBox(PaperUtils::CreateRectangle(pos,this->size), label.c_str(), clicked);
 }
 
 bool PaperCheckbox::Checked() {
@@ -118,13 +132,13 @@ bool PaperCheckbox::Checked() {
 }
 
 // PaperDropdownBox
-PaperDropdownBox::PaperDropdownBox(Vector2 pos, Vector2 size, std::vector<std::string> list) : UIObject(pos, size) {
+PaperDropdownBox::PaperDropdownBox(Vector2 pos, Vector2 size, std::vector<std::string> list) : PaperUIObject(pos, size) {
     this->list = list;
     ConstructString();
 }
 
-void PaperDropdownBox::DrawPos(Vector2 pos, Vector2 s) {
-    if(GuiDropdownBox(PaperUtils::CreateRectangle(pos, s), text.c_str(), &curIndex, editMode)) editMode = !editMode;
+void PaperDropdownBox::DrawPos(Vector2 pos) {
+    if(GuiDropdownBox(PaperUtils::CreateRectangle(pos, this->size), text.c_str(), &curIndex, editMode)) editMode = !editMode;
 }
 
 void PaperDropdownBox::ConstructString() {
@@ -137,17 +151,17 @@ void PaperDropdownBox::ConstructString() {
 }
 
 // PaperListView
-PaperListView::PaperListView(Vector2 pos, Vector2 s, std::vector<std::string> list) : PaperDropdownBox(pos, s, list) {}
+PaperListView::PaperListView(Vector2 pos, Vector2 size, std::vector<std::string> list) : PaperDropdownBox(pos, this->size, list) {}
 
-void PaperListView::DrawPos(Vector2 pos, Vector2 s) {
-    editMode = GuiListView(PaperUtils::CreateRectangle(pos, s), text.c_str(), &curIndex, editMode);
+void PaperListView::DrawPos(Vector2 pos) {
+    editMode = GuiListView(PaperUtils::CreateRectangle(pos, this->size), text.c_str(), &curIndex, editMode);
 }
 
 // PaperGroupBox
-PaperGroupBox::PaperGroupBox(Vector2 pos, Vector2 s, std::string label) : UIObject(pos, s) {
+PaperGroupBox::PaperGroupBox(Vector2 pos, Vector2 size, std::string label) : PaperUIObject(pos, this->size) {
     this->label = label;
 }
 
-void PaperGroupBox::DrawPos(Vector2 pos, Vector2 s) {
-    GuiGroupBox(PaperUtils::CreateRectangle(pos, s), label.c_str());
+void PaperGroupBox::DrawPos(Vector2 pos) {
+    GuiGroupBox(PaperUtils::CreateRectangle(pos, size), label.c_str());
 }

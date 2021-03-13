@@ -1,6 +1,7 @@
 #include <string>
 #include <vector>
 #include "raylib.h"
+#include "PaperObjects.h"
 
 #ifndef PAPERAPP_H
 #define PAPERAPP_H
@@ -21,6 +22,9 @@ class PaperApp {
         
         virtual void PaperDraw(); // Paper's draw order
         virtual void PaperStart(); // Paper's start order
+        virtual void PaperUpdate(); // Additional update loop for "tasks"
+
+        // Tasks are a concept for background processing of tasks for internal Paper work. 
 
         void RemoveFileOnCleanup(std::string str);
         Vector2 GetCenter();
@@ -29,6 +33,7 @@ class PaperApp {
         int initWidth;
         int initHeight;
         std::vector<std::string> filesToRemove;
+        std::vector<PaperTask> tasks;
         void Cleanup();
 };
 

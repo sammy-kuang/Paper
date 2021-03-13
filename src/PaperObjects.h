@@ -30,6 +30,9 @@ class CenteredObject {
         CenteredObject(Vector2 pos);
         virtual void Center() {}
         virtual void Draw() {}
+        virtual void DrawPos(Vector2 position) {}
+        virtual void DrawUncentered() {}
+        void Tween(Vector2 newPos, float totalTime, float stepTime, float curTime = 0);
 };
 
 class CenteredRectangle : public CenteredObject {
@@ -41,6 +44,7 @@ class CenteredRectangle : public CenteredObject {
         Rectangle GetRectangle();
         void Center() override;
         void Draw() override;
+        void DrawUncentered() override;
         void Draw(Color color);
 };
 
@@ -82,6 +86,14 @@ class CenteredAnimatedTexture : public CenteredObject {
         void Draw() override;
         bool CanDraw();
 
+};
+
+// Implementation of Tasks concept=
+
+class PaperTask {
+    public:
+        PaperTask() {}
+        virtual void Run() {}
 };
 
 #endif

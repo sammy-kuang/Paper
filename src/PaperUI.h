@@ -1,5 +1,6 @@
 #include <string>
 #include <vector>
+#include "PaperObjects.h"
 #include "raylib.h"
 
 class PaperUI {
@@ -7,23 +8,20 @@ class PaperUI {
         static std::string IconText(int iconId, std::string text);
         static void SetGUIOptions(int control, int property, int value);
         static void SetTextOnButtonCentered();
+        static void LoadStyle(std::string styleFile);
+        static void DrawThemeColor();
 };
 
-class UIObject {
+class PaperUIObject : public CenteredRectangle {
     public:
-        Vector2 position;
-        Vector2 size;
-        Rectangle rectangle;
-        UIObject() {}
-        UIObject(Vector2 position, Vector2 size);
-        void Draw();
-        void DrawCentered();
-        virtual void DrawPos(Vector2 pos, Vector2 size) {};
-    private:
-        Vector2 centerPos;
+        PaperUIObject() {}
+        PaperUIObject(Vector2 position, Vector2 size);
+        void Draw() override;
+        void DrawUncentered() override;
+        void DrawPos(Vector2 pos) override {};
 };
 
-class PaperTextBox : public UIObject {
+class PaperTextBox : public PaperUIObject {
     public:
         std::string initialText;
         int initialSize;
@@ -32,14 +30,14 @@ class PaperTextBox : public UIObject {
 
         std::string GetText();
 
-        void DrawPos(Vector2 pos, Vector2 size) override;
+        void DrawPos(Vector2 pos) override;
     private:
         char text[64];
         bool editMode = false;
 };
 
 
-class PaperSlider : public UIObject {
+class PaperSlider : public PaperUIObject {
     public:
         std::string label;
         bool showValue;
@@ -49,7 +47,7 @@ class PaperSlider : public UIObject {
         PaperSlider() {}
         PaperSlider(Vector2 position, Vector2 size, std::string label, bool showValue, int sliderValue, int minValue, int maxValue);
         
-        void DrawPos(Vector2 pos, Vector2 size) override;
+        void DrawPos(Vector2 pos) override;
 
         std::string GetValueString();
         int GetValue();
@@ -60,10 +58,18 @@ class PaperSliderBar : public PaperSlider {
         PaperSliderBar() {}
         PaperSliderBar(Vector2 position, Vector2 size, std::string label,bool showValue, int sliderValue, int minValue, int maxValue);
             
-        void DrawPos(Vector2 pos, Vector2 size) override;
+        void DrawPos(Vector2 pos) override;
 };
 
-class PaperClickable : public UIObject {
+class PaperProgressBar : public PaperSlider {
+    public:
+        PaperProgressBar() {}
+        PaperProgressBar(Vector2 position, Vector2 size, std::string label,bool showValue, int sliderValue, int minValue, int maxValue);
+            
+        void DrawPos(Vector2 pos) override;
+};
+
+class PaperClickable : public PaperUIObject {
     public:
         PaperClickable() {}
         PaperClickable(Vector2 position, Vector2 size, std::string label);
@@ -76,7 +82,7 @@ class PaperButton : public PaperClickable {
         PaperButton() {}
         PaperButton(Vector2 position, Vector2 size, std::string label);
         
-        void DrawPos(Vector2 pos, Vector2 size) override;
+        void DrawPos(Vector2 pos) override;
         bool Clicked();
 };
 
@@ -84,11 +90,11 @@ class PaperCheckbox : public PaperClickable {
     public:
         PaperCheckbox() {}
         PaperCheckbox(Vector2 position, Vector2 size, std::string label);
-        void DrawPos(Vector2 pos, Vector2 size) override;
+        void DrawPos(Vector2 pos) override;
         bool Checked();
 };
 
-class PaperDropdownBox : public UIObject {
+class PaperDropdownBox : public PaperUIObject {
     public:
         PaperDropdownBox() {}
         PaperDropdownBox(Vector2 position, Vector2 size, std::vector<std::string> list);
@@ -96,7 +102,7 @@ class PaperDropdownBox : public UIObject {
         int curIndex = 0;
         bool editMode = false;
         std::string text = "";
-        void DrawPos(Vector2 pos, Vector2 size) override;
+        void DrawPos(Vector2 pos) override;
     private:
         void ConstructString();
 };
@@ -105,15 +111,15 @@ class PaperListView : public PaperDropdownBox {
     public:
         PaperListView() {}
         PaperListView(Vector2 position, Vector2 size, std::vector<std::string> list);
-        void DrawPos(Vector2 pos, Vector2 size) override;
+        void DrawPos(Vector2 pos) override;
 };
 
-class PaperGroupBox : public UIObject {
+class PaperGroupBox : public PaperUIObject {
     public:
         PaperGroupBox() {}
         PaperGroupBox(Vector2 position, Vector2 size, std::string label);
         std::string label;
 
-        void DrawPos(Vector2 pos, Vector2 size) override;
+        void DrawPos(Vector2 pos) override;
 };
 

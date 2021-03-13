@@ -20,6 +20,7 @@ CenteredObject::CenteredObject(Vector2 pos) {
     this->position = pos;
 }
 
+ 
 // centered rectangle start
 CenteredRectangle::CenteredRectangle(Vector2 pos, Vector2 size) :  CenteredObject(pos) {
     this->size = size;
@@ -37,6 +38,10 @@ void CenteredRectangle::Draw() {
 
 void CenteredRectangle::Draw(Color color) {
     DrawRectangleRec(rectangle, color);
+}
+
+void CenteredRectangle::DrawUncentered() {
+    DrawRectangleRec((Rectangle){position.x, position.y, size.x, size.y}, BLACK);
 }
 
 Rectangle CenteredRectangle::GetRectangle() {

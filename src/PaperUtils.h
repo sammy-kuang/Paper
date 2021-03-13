@@ -35,7 +35,6 @@ class PaperUtils {
         static std::vector<Texture2D> GetTexturesFromPaths(std::vector<std::string> paths);
         static std::vector<std::string> LoadGIF(std::string path, PaperApp *instance); 
 
-
         // additional methods
         static Rectangle CreateRectangle(Vector2 pos, Vector2 size);
 };

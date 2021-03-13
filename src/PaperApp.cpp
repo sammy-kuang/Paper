@@ -14,6 +14,12 @@ void PaperApp::Draw() {
     ClearBackground(WHITE);
 }
 
+void PaperApp::PaperUpdate() {
+    for(int i = 0; i < tasks.size(); i++) {
+        tasks[i].Run();
+    }
+}
+
 void PaperApp::PaperDraw() {
     BeginDrawing();
     Draw();
@@ -28,6 +34,7 @@ void PaperApp::PaperStart() {
 
     while (!WindowShouldClose())
     {
+        PaperUpdate();
         Update();
         PaperDraw();
     }
