@@ -95,7 +95,7 @@ class CenteredAnimatedTexture : public CenteredObject {
 class PaperTask {
     public:
         PaperTask(PaperApp *app);
-        virtual void Run() {}
+        virtual void Run();
     private:
         PaperApp *app;
 };

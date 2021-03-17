@@ -26,6 +26,8 @@ class PaperApp {
         virtual void PaperUpdate(); // Additional update loop for "tasks"
 
         // Tasks are a concept for background processing of tasks for internal Paper work. 
+        std::vector<PaperTask*> tasks;
+        void AddTask(PaperTask *task);
 
         void RemoveFileOnCleanup(std::string str);
         Vector2 GetCenter();
@@ -34,7 +36,6 @@ class PaperApp {
         int initWidth;
         int initHeight;
         std::vector<std::string> filesToRemove;
-        std::vector<PaperTask> tasks;
         void Cleanup();
 };
 

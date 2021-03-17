@@ -17,7 +17,7 @@ void PaperApp::Draw() {
 
 void PaperApp::PaperUpdate() {
     for(int i = 0; i < tasks.size(); i++) {
-        tasks[i].Run();
+        tasks[i]->Run();
     }
 }
 
@@ -61,4 +61,8 @@ void PaperApp::Cleanup() {
 
 Vector2 PaperApp::GetCenter() {
     return (Vector2){(float)(GetScreenWidth())/2, (float)(GetScreenHeight())/2};
+}
+
+void PaperApp::AddTask(PaperTask *task) {
+    this->tasks.push_back(task);
 }

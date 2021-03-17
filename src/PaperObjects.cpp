@@ -134,4 +134,9 @@ bool CenteredAnimatedTexture::CanDraw() {
 
 PaperTask::PaperTask(PaperApp *app) {
     this->app = app;
+    app->AddTask(this);
+}
+
+void PaperTask::Run() {
+    std::cout << "Running a PaperTask" << std::endl;
 }
