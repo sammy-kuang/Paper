@@ -73,6 +73,15 @@ class CenteredText : public TextObject {
         void Center() override;
 };
 
+class CenteredTexture: public CenteredObject {
+    public:
+        Texture2D texture;
+        CenteredTexture() {}
+        CenteredTexture(Vector2 pos, Texture2D texture);
+        void Center() override;
+        void Draw() override;
+};
+
 class CenteredAnimatedTexture : public CenteredObject {
     private:
         float timeUntilNextFrame;

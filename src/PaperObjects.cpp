@@ -84,6 +84,21 @@ void CenteredText::Center() {
     literalPosition = PaperUtils::CenterTextToPoint(position, fontData, text);
 }
 
+
+// centered texture start
+CenteredTexture::CenteredTexture(Vector2 pos, Texture2D texture) : CenteredObject(pos) {
+    this->texture = texture;
+    Center();
+}
+
+void CenteredTexture::Center() {
+    literalPosition = PaperUtils::CenterTextureToPoint(position, texture);
+}
+
+void CenteredTexture::Draw() {
+    DrawTexture(texture, literalPosition.x, literalPosition.y, WHITE);
+}
+
 // centered animated texture start
 CenteredAnimatedTexture::CenteredAnimatedTexture(Vector2 pos, std::vector<Texture2D> images, float timeUntilNextFrame) : CenteredObject(pos) {
     this->frames = images;
