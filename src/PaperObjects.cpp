@@ -6,7 +6,7 @@
 #include "PaperUtils.h"
 #include "PaperApp.h"
 
-Circle::Circle(Vector2 postiion, float radius) {
+Circle::Circle(Vector2 position, float radius) {
     this->position = position;
     this->radius = radius;
 }
