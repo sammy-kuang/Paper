@@ -1,4 +1,5 @@
 #include "raylib.h"
+#include "FreeImage.h"
 #include <vector>
 
 class Circle;
@@ -10,7 +11,6 @@ class CenteredObject;
 #define PAPERUTILS_H
 
 class PaperUtils {
-
     public:
         // centering methods
         static Vector2 CenterRectToPoint(Vector2 point, Vector2 size);
@@ -34,9 +34,13 @@ class PaperUtils {
         static void DrawCenteredObject(CenteredObject obj);
 
         static bool CompareColor(Color a, Color b);
+
         static std::vector<Texture2D> GetTexturesFromDirectory(std::string directory);
         static std::vector<Texture2D> GetTexturesFromPaths(std::vector<std::string> paths);
+
+        // freeimage methods
         static std::vector<std::string> LoadGIF(std::string path, PaperApp *instance); 
+        static void ConvertToPng(std::string path, std::string outputPath, FREE_IMAGE_FORMAT currentFormat);
 
         // additional methods
         static Rectangle CreateRectangle(Vector2 pos, Vector2 size);

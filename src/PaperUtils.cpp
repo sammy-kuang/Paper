@@ -15,7 +15,6 @@ Vector2 PaperUtils::CenterRectToPoint(Vector2 point, Vector2 size)
 
 Vector2 PaperUtils::CenterTextToPoint(Vector2 point, Font font, float fontSize, std::string text, float spacing = 0.0f)
 {
-
     Vector2 textSize = MeasureTextEx(font, text.c_str(), fontSize, spacing);
     return (Vector2){point.x - textSize.x / 2, point.y - textSize.y / 2};
 }
@@ -122,8 +121,6 @@ std::vector<std::string> PaperUtils::LoadGIF(std::string path, PaperApp *instanc
     
     std::vector<std::string> returnVector;
 
-    FreeImage_Initialise();
-
     FIMULTIBITMAP *bitmap = FreeImage_OpenMultiBitmap(FIF_GIF, path.c_str(), false, true);
     if(!bitmap) {
         std::cout << "PAPER: Failed to parse image file." << std::endl;
@@ -148,9 +145,28 @@ std::vector<std::string> PaperUtils::LoadGIF(std::string path, PaperApp *instanc
     }
 
     FreeImage_CloseMultiBitmap(bitmap);
-    FreeImage_DeInitialise();
 
     return returnVector;
+}
+
+void PaperUtils::ConvertToPng(std::string path, std::string outputPath, FREE_IMAGE_FORMAT currentFormat) {
+    FIBITMAP *bitmap = FreeImage_Load(currentFormat, path.c_str(), BMP_DEFAULT);
+
+    if(bitmap) {
+        // loaded image successfully
+
+        // attempt conversion to png
+        if(FreeImage_Save(FIF_PNG, bitmap, outputPath.c_str(), PNG_DEFAULT)) {
+            // on success
+            std::cout << "PAPER: Successfully converted " + path + " to a PNG file format." << std::endl;
+        }
+        else {
+            // on failure
+            std::cout << "PAPER: Failed to convert " + path + " to a PNG file format." << std::endl;
+        }
+
+        FreeImage_Unload(bitmap);
+    }
 }
 
 Rectangle PaperUtils::CreateRectangle(Vector2 p, Vector2 s) {

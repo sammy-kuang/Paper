@@ -29,7 +29,7 @@ class Program : public PaperApp {
 
         void Draw() override {
             ClearBackground(WHITE);
-            ptb.DrawCentered();
+            ptb.Draw();
         }   
 };
 

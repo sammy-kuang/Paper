@@ -151,14 +151,14 @@ void PaperDropdownBox::ConstructString() {
 }
 
 // PaperListView
-PaperListView::PaperListView(Vector2 pos, Vector2 size, std::vector<std::string> list) : PaperDropdownBox(pos, this->size, list) {}
+PaperListView::PaperListView(Vector2 pos, Vector2 size, std::vector<std::string> list) : PaperDropdownBox(pos, size, list) {}
 
 void PaperListView::DrawPos(Vector2 pos) {
     editMode = GuiListView(PaperUtils::CreateRectangle(pos, this->size), text.c_str(), &curIndex, editMode);
 }
 
 // PaperGroupBox
-PaperGroupBox::PaperGroupBox(Vector2 pos, Vector2 size, std::string label) : PaperUIObject(pos, this->size) {
+PaperGroupBox::PaperGroupBox(Vector2 pos, Vector2 size, std::string label) : PaperUIObject(pos, size) {
     this->label = label;
 }
 
