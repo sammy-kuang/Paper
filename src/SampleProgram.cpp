@@ -5,27 +5,27 @@
 class Program : public PaperApp {
     public:
         Program() : PaperApp(640, 480, "Paper Project") {}
-        PaperTextBox ptb;
-        Circle circle;
+
+        std::vector<std::string> list;
+        PaperDropdownBox *plv;
 
         void Start() override {
             SetTargetFPS(60);
-            ptb = PaperTextBox(GetCenter(), (Vector2) {250, 50}, "Running Paper!", 14);
-            circle = Circle(GetCenter(), 10);
+            list.push_back("Running");
+            list.push_back("Paper!");
+            plv = new PaperDropdownBox(GetCenter(), Vector2{250, 50}, list);
         }
 
         void Update () override {
-            
+            plv->Draw();
         }
 
         void Draw() override {
             ClearBackground(WHITE);
-            PaperUtils::DrawCircle(circle, RED);
-            ptb.Draw();
         }   
 };
 
 int main(int argc, char *argv[]) {
-    Program paperApp = Program();
-    paperApp.PaperStart();
+    Program *paperApp = new Program();
+    paperApp->PaperStart();
 }

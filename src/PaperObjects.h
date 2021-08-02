@@ -1,6 +1,7 @@
 #include "raylib.h"
 #include <string>
 #include <vector>
+#include <functional>
 
 class PaperApp;
 
@@ -103,10 +104,10 @@ class CenteredAnimatedTexture : public CenteredObject {
 
 class PaperTask {
     public:
-        PaperTask(PaperApp *app);
+        PaperTask(PaperApp* app);
         virtual void Run();
     private:
-        PaperApp *app;
+        PaperApp* app;
 };
 
 #endif

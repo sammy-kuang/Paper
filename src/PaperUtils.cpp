@@ -149,7 +149,7 @@ std::vector<std::string> PaperUtils::LoadGIF(std::string path, PaperApp *instanc
     return returnVector;
 }
 
-void PaperUtils::ConvertToPng(std::string path, std::string outputPath, FREE_IMAGE_FORMAT currentFormat) {
+void PaperUtils::ConvertToPng(std::string path, std::string outputPath, FREE_IMAGE_FORMAT currentFormat, PaperApp *instance,bool keep) {
     FIBITMAP *bitmap = FreeImage_Load(currentFormat, path.c_str(), BMP_DEFAULT);
 
     if(bitmap) {
@@ -166,6 +166,13 @@ void PaperUtils::ConvertToPng(std::string path, std::string outputPath, FREE_IMA
         }
 
         FreeImage_Unload(bitmap);
+    }
+    else {
+        std::cout << "PAPER: Failed to open \"" + path + "\"." << std::endl;
+    }
+
+    if(!keep) {
+        instance->RemoveFileOnCleanup(outputPath);
     }
 }
 
