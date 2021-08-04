@@ -2,18 +2,19 @@
 #include <iostream>
 #include <filesystem>
 
+using namespace std;
+
 class Program : public PaperApp {
     public:
         Program() : PaperApp(640, 480, "Paper Project") {}
 
-        std::vector<std::string> list;
+        vector<string> list;
         PaperDropdownBox *plv;
 
         void Start() override {
             SetTargetFPS(60);
             list.push_back("Running");
-            list.push_back("Paper!");
-            list.push_back("Made by liver man!");
+            list.push_back("#10#Paper!");
             plv = new PaperDropdownBox(GetCenter(), Vector2{250, 50}, list);
         }
 
