@@ -132,8 +132,8 @@ bool PaperCheckbox::Checked() {
 }
 
 // PaperDropdownBox
-PaperDropdownBox::PaperDropdownBox(Vector2 pos, Vector2 size, std::vector<std::string> list) : PaperUIObject(pos, size) {
-    this->list = list;
+PaperDropdownBox::PaperDropdownBox(Vector2 pos, Vector2 size, std::vector<std::string> initialList) : PaperUIObject(pos, size) {
+    this->list = initialList;
     ConstructString();
 }
 
@@ -143,15 +143,25 @@ void PaperDropdownBox::DrawPos(Vector2 pos) {
 
 void PaperDropdownBox::ConstructString() {
     if(list.size() < 1) return;
-
+    this->text = "";
     for(int i = 0; i < list.size(); i++) {
         text.append(list[i]+";");
     }
     text.replace(text.size()-1, 1, "");
 }
 
+void PaperDropdownBox::CopyList(std::vector<std::string> list) {
+    this->list = list;
+    ConstructString();
+}
+
+void PaperDropdownBox::Add(std::string newElement) {
+    list.push_back(newElement);
+    ConstructString();
+}
+
 // PaperListView
-PaperListView::PaperListView(Vector2 pos, Vector2 size, std::vector<std::string> list) : PaperDropdownBox(pos, size, list) {}
+PaperListView::PaperListView(Vector2 pos, Vector2 size, std::vector<std::string> initialList) : PaperDropdownBox(pos, size, initialList) {}
 
 void PaperListView::DrawPos(Vector2 pos) {
     editMode = GuiListView(PaperUtils::CreateRectangle(pos, this->size), text.c_str(), &curIndex, editMode);

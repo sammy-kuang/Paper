@@ -99,20 +99,22 @@ class PaperCheckbox : public PaperClickable {
 class PaperDropdownBox : public PaperUIObject {
     public:
         PaperDropdownBox() {}
-        PaperDropdownBox(Vector2 position, Vector2 size, std::vector<std::string> list);
-        std::vector<std::string> list;
+        PaperDropdownBox(Vector2 position, Vector2 size, std::vector<std::string> initialList);
         int curIndex = 0;
         bool editMode = false;
         std::string text = "";
         void DrawPos(Vector2 pos) override;
+        void CopyList(std::vector<std::string> list);
+        void Add(std::string newElement);
     private:
         void ConstructString();
+        std::vector<std::string> list;
 };
 
 class PaperListView : public PaperDropdownBox {
     public:
         PaperListView() {}
-        PaperListView(Vector2 position, Vector2 size, std::vector<std::string> list);
+        PaperListView(Vector2 position, Vector2 size, std::vector<std::string> initialList);
         void DrawPos(Vector2 pos) override;
 };
 

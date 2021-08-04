@@ -13,6 +13,7 @@ class Program : public PaperApp {
             SetTargetFPS(60);
             list.push_back("Running");
             list.push_back("Paper!");
+            list.push_back("Made by liver man!");
             plv = new PaperDropdownBox(GetCenter(), Vector2{250, 50}, list);
         }
 
