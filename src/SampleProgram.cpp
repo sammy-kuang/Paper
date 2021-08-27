@@ -19,15 +19,16 @@ class Program : public PaperApp {
         }
 
         void Update () override {
-            plv->Draw();
+
         }
 
         void Draw() override {
             ClearBackground(WHITE);
-        }   
+            plv->Draw();
+        }
 };
 
 int main(int argc, char *argv[]) {
-    Program *paperApp = new Program();
-    paperApp->PaperStart();
-}
+    Program *p = new Program();
+    p->PaperStart();
+}    

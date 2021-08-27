@@ -44,6 +44,7 @@ void PaperApp::PaperStart() {
     }
 
     OnClose();
+    OnCleanup();
     Cleanup();
     CloseWindow();
 

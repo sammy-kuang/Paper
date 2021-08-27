@@ -54,6 +54,8 @@ TextObject::TextObject(Vector2 pos, FontData fontData, Color color, std::string 
     this->fontData = fontData;
     this->color = color;
     this-> text = text;
+
+    Center();
 }   
 
 TextObject::TextObject(Vector2 pos, FontData fontData, Color color) : CenteredObject(pos) {
@@ -83,7 +85,6 @@ CenteredText::CenteredText(Vector2 pos, FontData fd, Color color) : TextObject(p
 void CenteredText::Center() {
     literalPosition = PaperUtils::CenterTextToPoint(position, fontData, text);
 }
-
 
 // centered texture start
 CenteredTexture::CenteredTexture(Vector2 pos, Texture2D texture) : CenteredObject(pos) {
