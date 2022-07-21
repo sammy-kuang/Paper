@@ -113,6 +113,7 @@ class PaperDropdownBox : public PaperUIObject {
 
 class PaperListView : public PaperDropdownBox {
     public:
+        int scrollIndex = 0;
         PaperListView() {}
         PaperListView(Vector2 position, Vector2 size, std::vector<std::string> initialList);
         void DrawPos(Vector2 pos) override;

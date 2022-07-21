@@ -164,7 +164,7 @@ void PaperDropdownBox::Add(std::string newElement) {
 PaperListView::PaperListView(Vector2 pos, Vector2 size, std::vector<std::string> initialList) : PaperDropdownBox(pos, size, initialList) {}
 
 void PaperListView::DrawPos(Vector2 pos) {
-    editMode = GuiListView(PaperUtils::CreateRectangle(pos, this->size), text.c_str(), &curIndex, editMode);
+    curIndex = GuiListView(PaperUtils::CreateRectangle(pos, this->size), text.c_str(), &scrollIndex, curIndex);
 }
 
 // PaperGroupBox
