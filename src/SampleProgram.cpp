@@ -15,9 +15,9 @@ class Program : public PaperApp {
             SetTargetFPS(60);
             list.push_back("Running");
             list.push_back("#10#Paper!");
-            list.push_back("Now using");
-            list.push_back("Raylib 4.0!");
-            plv = new PaperListView(GetCenter(), Vector2{250, 100}, list);
+            list.push_back("Now using Raylib 4.0!");
+            list.push_back("Built with CMake!");
+            plv = new PaperListView(GetCenter(), Vector2{250, 200}, list);
         }
 
         void Update () override {
