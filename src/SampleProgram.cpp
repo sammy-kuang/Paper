@@ -9,24 +9,17 @@ class Program : public PaperApp {
         Program() : PaperApp(640, 480, "Paper Project") {}
 
         vector<string> list;
-        PaperListView *plv;
 
         void Start() override {
             SetTargetFPS(60);
-            list.push_back("Running");
-            list.push_back("#10#Paper!");
-            list.push_back("Now using Raylib 4.0!");
-            list.push_back("Built with CMake!");
-            plv = new PaperListView(GetCenter(), Vector2{250, 200}, list);
         }
 
         void Update () override {
-
+        
         }
 
         void Draw() override {
             ClearBackground(WHITE);
-            plv->Draw();
         }
 };
 

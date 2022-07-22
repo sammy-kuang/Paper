@@ -96,18 +96,16 @@ void PaperSliderBar::DrawPos(Vector2 pos) {
 }
 
 // PaperProgressBar
-PaperProgressBar::PaperProgressBar(Vector2 position, Vector2 size, std::string label, bool showValue,int sliderValue, int minValue, int maxValue) : PaperSlider(position, size, label, showValue,sliderValue, minValue, maxValue) {}
+PaperProgressBar::PaperProgressBar(Vector2 position, Vector2 size, std::string label, bool showValue,int sliderValue, int minValue, int maxValue) : PaperSlider(position, size, label, showValue ,sliderValue, minValue, maxValue) {}
 
 void PaperProgressBar::DrawPos(Vector2 pos) {
-    sliderValue = GuiProgressBar(PaperUtils::CreateRectangle(pos,this->size), label.c_str(), GetValueString().c_str(), sliderValue, minValue, maxValue);
+    sliderValue = GuiProgressBar(PaperUtils::CreateRectangle(pos,this->size), label.c_str(), showValue ? GetValueString().c_str() : "", sliderValue, minValue, maxValue);
 }
 
 // PaperClickable
 PaperClickable::PaperClickable(Vector2 position, Vector2 size, std::string label) : PaperUIObject(position, size) {
     this->label = label;
 }
-
-
 
 // PaperButton
 PaperButton::PaperButton(Vector2 position, Vector2 size, std::string label) : PaperClickable(position, size, label) {}

@@ -66,7 +66,7 @@ class PaperSliderBar : public PaperSlider {
 class PaperProgressBar : public PaperSlider {
     public:
         PaperProgressBar() {}
-        PaperProgressBar(Vector2 position, Vector2 size, std::string label,bool showValue, int sliderValue, int minValue, int maxValue);
+        PaperProgressBar(Vector2 position, Vector2 size, std::string label, bool showValue, int sliderValue, int minValue, int maxValue);
             
         void DrawPos(Vector2 pos) override;
 };
