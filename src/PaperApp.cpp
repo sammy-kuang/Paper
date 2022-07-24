@@ -1,6 +1,5 @@
 #include <iostream>
 #include <string>
-#include "FreeImage.h"
 #include "raylib.h"
 #include "PaperObjects.h"
 #include "PaperApp.h"
@@ -29,8 +28,6 @@ void PaperApp::PaperDraw() {
 }
 
 void PaperApp::PaperStart() {
-    FreeImage_Initialise(); // initialize FreeImage only once
-
     Awake();
     InitWindow(initWidth, initHeight, title.c_str());
     std::cout << "PAPER: OpenGL context opened" << std::endl;
@@ -47,8 +44,6 @@ void PaperApp::PaperStart() {
     OnCleanup();
     Cleanup();
     CloseWindow();
-
-    FreeImage_DeInitialise(); // deinitialize FreeImage only once
 }
 
 void PaperApp::RemoveFileOnCleanup(std::string str) {

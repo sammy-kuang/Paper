@@ -7,9 +7,7 @@ using namespace std;
 class Program : public PaperApp {
     public:
         Program() : PaperApp(640, 480, "Paper Project") {}
-
-        vector<string> list;
-
+        
         void Start() override {
             SetTargetFPS(60);
         }

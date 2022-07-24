@@ -5,7 +5,6 @@
 #include "PaperApp.h"
 #include "PaperUtils.h"
 #include "PaperObjects.h"
-#include <FreeImage.h>
 
 
 Vector2 PaperUtils::CenterRectToPoint(Vector2 point, Vector2 size)
@@ -114,66 +113,6 @@ std::vector<Texture2D> PaperUtils::GetTexturesFromPaths(std::vector<std::string>
         returnVector.push_back(tex);
     } 
     return returnVector;
-}
-
-
-std::vector<std::string> PaperUtils::LoadGIF(std::string path, PaperApp *instance) {
-    
-    std::vector<std::string> returnVector;
-
-    FIMULTIBITMAP *bitmap = FreeImage_OpenMultiBitmap(FIF_GIF, path.c_str(), false, true);
-    if(!bitmap) {
-        std::cout << "PAPER: Failed to parse image file." << std::endl;
-        return returnVector;
-    }
-
-    int frameCount = FreeImage_GetPageCount(bitmap);
-
-    for(int i = 0; i < frameCount; i++) {
-        std::string exportPath = ((std::string)"assets/" + GetFileNameWithoutExt(path.c_str()) +std::to_string(i) + (std::string)".png");
-        FIBITMAP *frame = FreeImage_LockPage(bitmap, i);
-        bool success = FreeImage_Save(FIF_PNG, frame, exportPath.c_str());
-        FreeImage_UnlockPage(bitmap, frame, false);
-    
-        if(success) {
-            returnVector.push_back(exportPath);
-            instance->RemoveFileOnCleanup(exportPath);
-        }
-        else {
-            std::cout << "PAPER: WARNING: Failed to process a frame in GIF processing";
-        }
-    }
-
-    FreeImage_CloseMultiBitmap(bitmap);
-
-    return returnVector;
-}
-
-void PaperUtils::ConvertToPng(std::string path, std::string outputPath, FREE_IMAGE_FORMAT currentFormat, PaperApp *instance,bool keep) {
-    FIBITMAP *bitmap = FreeImage_Load(currentFormat, path.c_str(), BMP_DEFAULT);
-
-    if(bitmap) {
-        // loaded image successfully
-
-        // attempt conversion to png
-        if(FreeImage_Save(FIF_PNG, bitmap, outputPath.c_str(), PNG_DEFAULT)) {
-            // on success
-            std::cout << "PAPER: Successfully converted " + path + " to a PNG file format." << std::endl;
-        }
-        else {
-            // on failure
-            std::cout << "PAPER: Failed to convert " + path + " to a PNG file format." << std::endl;
-        }
-
-        FreeImage_Unload(bitmap);
-    }
-    else {
-        std::cout << "PAPER: Failed to open \"" + path + "\"." << std::endl;
-    }
-
-    if(!keep) {
-        instance->RemoveFileOnCleanup(outputPath);
-    }
 }
 
 Rectangle PaperUtils::CreateRectangle(Vector2 p, Vector2 s) {
