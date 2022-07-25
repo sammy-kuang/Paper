@@ -34,4 +34,4 @@ target_include_directories(raylib
                            ${CMAKE_CURRENT_SOURCE_DIR}
                            )
 
-file(COPY ${paper_public_headers} DESTINATION "include")
+file(COPY ${paper_public_headers} DESTINATION ${CMAKE_CURRENT_SOURCE_DIR}/include)
