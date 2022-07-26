@@ -6,7 +6,7 @@ set(PROJECT_INCLUDE "${CMAKE_CURRENT_LIST_DIR}/src/") # Define PROJECT_INCLUDE t
 
 include(FetchContent)
 # include Paper
-FetchContent_Declare(Paper GIT_REPOSITORY https://github.com/thyliverman/Paper.git GIT_TAG dev)
+FetchContent_Declare(Paper GIT_REPOSITORY https://github.com/thyliverman/Paper.git GIT_TAG master)
 FetchContent_MakeAvailable(Paper)
 
 add_executable(${PROJECT_NAME})
