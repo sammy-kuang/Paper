@@ -1,14 +1,23 @@
 # Paper
 ## C++ rewrite of PaperSDL, dedicated to making raylib and raygui just a little easier to work with. https://github.com/raysan5/raylib
 
-**Usage**:
-Clone the files into your C++ project directory.
-Use the "Paper.h" header file for quick access to all methods.
-Read the header files for a list of methods.
+### Usage:
+Copy the files from the example folder into a directory of your choosing
 
+Create a folder called "build", and navigate into it
+
+Compile your source folder using CMake:
+```bash
+mkdir build # create a build directory
+cd build # navigate into your new build directory
+cmake .. # configure the project
+make -j8 # compile the project (you can substitute the 8 with the number of cores you have)
+./SampleProgram # you should be able to run the binary now! if you're on windows, the command will be .\SampleProgram.exe
+```
+This should produce a binary called "SampleProgram". You can change the program name by changing line 2 on the CMakeLists.txt file.
 
 ### SampleProgram.cpp:
-```
+```cpp
 #include "Paper.h"
 #include <iostream>
 #include <filesystem>
