@@ -38,6 +38,8 @@ class PaperUtils {
         // additional methods
         static Rectangle CreateRectangle(Vector2 pos, Vector2 size);
         static bool CompareColor(Color a, Color b);
+
+        static std::string VecToString(Vector2 v);
 };
 
 #endif
