@@ -1,7 +1,6 @@
 #include "raylib.h"
 #include <iostream>
 #include <string>
-#include <bits/stdc++.h>
 #include "PaperApp.h"
 #include "PaperUtils.h"
 #include "PaperObjects.h"
