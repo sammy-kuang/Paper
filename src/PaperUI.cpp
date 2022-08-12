@@ -25,7 +25,7 @@ void PaperUI::SetGUIOptions(int control, int property, int value) {
 }
 
 void PaperUI::SetTextOnButtonCentered() {
-    GuiSetStyle(BUTTON, TEXT_ALIGNMENT, GUI_TEXT_ALIGN_CENTER);
+    GuiSetStyle(BUTTON, TEXT_ALIGNMENT, TEXT_ALIGN_CENTER);
 }
 
 void PaperUI::LoadStyle(std::string path) {
