@@ -93,25 +93,31 @@ bool PaperUtils::CompareColor(Color a, Color b)
     return true;
 }
 
+// Limited to just loading PNGs
 std::vector<Texture2D> PaperUtils::GetTexturesFromDirectory(std::string directory)
 {
     std::vector<std::string> extensions = {".png"};
 
-    int count = 0;
-    char **files = GetDirectoryFiles(directory.c_str(), &count);
+    auto files = LoadDirectoryFiles(directory.c_str());
+    auto count = files.count;
+
+    std::cout << (count) << "\n";
+
     std::vector<std::string> paths;
 
     for (int i = 0; i < count; i++)
     {
-        std::string path = directory + files[i];
+        std::string path = files.paths[i];
 
         for (int x = 0; x < extensions.size(); x++)
         {
-            if (IsFileExtension(path.c_str(), extensions[x].c_str()))
+            if (IsFileExtension(path.c_str(), extensions[x].c_str())) {
                 paths.push_back(path);
+            }
         }
     }
 
+    // If you name the files in the directory by number, this will sort in place.
     std::sort(paths.begin(), paths.end());
     std::vector<Texture2D> textures;
 
