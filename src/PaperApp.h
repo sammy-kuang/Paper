@@ -1,9 +1,9 @@
+#ifndef PAPERAPP_H
+#define PAPERAPP_H
 #include <string>
 #include <vector>
 #include "raylib.h"
 
-#ifndef PAPERAPP_H
-#define PAPERAPP_H
 
 class PaperTask;
 

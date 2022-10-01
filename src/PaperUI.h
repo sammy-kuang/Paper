@@ -1,3 +1,6 @@
+#ifndef PAPERUI_H
+#define PAPERUI_H
+
 #include <string>
 #include <vector>
 #include "PaperObjects.h"
@@ -128,3 +131,4 @@ class PaperGroupBox : public PaperUIObject {
         void DrawPos(Vector2 pos) override;
 };
 
+#endif

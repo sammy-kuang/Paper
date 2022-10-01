@@ -1,3 +1,5 @@
+#ifndef PAPEROBJECTS_H
+#define PAPEROBJECTS_H
 #include "raylib.h"
 #include <string>
 #include <vector>
@@ -5,8 +7,6 @@
 
 class PaperApp;
 
-#ifndef PAPEROBJECTS_H
-#define PAPEROBJECTS_H
 
 class Circle {
     public:

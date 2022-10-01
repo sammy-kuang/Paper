@@ -1,3 +1,5 @@
+#ifndef PAPERUTILS_H
+#define PAPERUTILS_H
 #include "raylib.h"
 #include <vector>
 
@@ -6,8 +8,6 @@ class FontData;
 class PaperApp;
 class CenteredObject;
 
-#ifndef PAPERUTILS_H
-#define PAPERUTILS_H
 
 class PaperUtils {
     public:
